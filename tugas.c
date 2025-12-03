@@ -1,5 +1,8 @@
 #include <stdio.h>4
 int main()
 {
-  printf("Yo whatsapp!");
+    int angka;
+
+    printf("Masukkan angka: ");
+    scanf("%d", &angka);
 }
