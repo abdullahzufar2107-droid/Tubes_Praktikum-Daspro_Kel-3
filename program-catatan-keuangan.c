@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+int main() 
+{
 int pilihan;
 int running = 1;   // agar looping
 
@@ -45,4 +47,5 @@ while (running) {
         printf("\nTekan ENTER untuk kembali ke menu...");
         getchar(); getchar();   // untuk jeda
     }
+}
 }
