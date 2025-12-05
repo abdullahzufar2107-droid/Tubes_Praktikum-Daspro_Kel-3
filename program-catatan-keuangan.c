@@ -5,5 +5,5 @@ int main()
 
     printf("Masukkan angka: ");
     scanf("%d", &angka);
-    printf("Rama jelek");
+    printf("Rama jelek kali");
 } 
