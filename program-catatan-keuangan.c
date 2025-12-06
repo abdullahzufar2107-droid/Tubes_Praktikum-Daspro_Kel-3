@@ -64,35 +64,36 @@ void tambahTransaksi(Transaksi transaksi[], int *jumlahTransaksi) {
     printf("Masukkan jumlah uang: ");
     scanf("%d", &jumlah);
 
-// Cek jenis transaksi
-if (jenis == 'M' || jenis == 'm') {
-    // Pemasukan
-    strcpy(transaksi[*jumlahTransaksi].tanggal, tanggal);
-    transaksi[*jumlahTransaksi].jenis = jenis;
-    strcpy(transaksi[*jumlahTransaksi].kategori, kategori);
-    transaksi[*jumlahTransaksi].jumlah = jumlah;
-
-    (*jumlahTransaksi)++;
-    printf("Transaksi pemasukan berhasil ditambahkan.\n");
-}
-else if (jenis == 'K' || jenis == 'k'){
-    // Pengeluaran
-    int saldo = hitungSaldo(transaksi, *jumlahTransaksi);
-
-    if (saldo >= jumlah){
+    // Cek jenis transaksi
+    if (jenis == 'M' || jenis == 'm') {
+        // Pemasukan
         strcpy(transaksi[*jumlahTransaksi].tanggal, tanggal);
         transaksi[*jumlahTransaksi].jenis = jenis;
         strcpy(transaksi[*jumlahTransaksi].kategori, kategori);
         transaksi[*jumlahTransaksi].jumlah = jumlah;
 
         (*jumlahTransaksi)++;
-        printf("Transaksi pengeluaran berhasil ditambahkan.\n");
-    } else {
-        printf("Transaksi ditolak. Saldo Anda tidak mencukupi. \n");
+        printf("Transaksi pemasukan berhasil ditambahkan.\n");
     }
-}
-else {
-    printf("Jenis transaksi tidak valid! \n");
+    else if (jenis == 'K' || jenis == 'k'){
+        // Pengeluaran
+        int saldo = hitungSaldo(transaksi, *jumlahTransaksi);
+
+        if (saldo >= jumlah){
+            strcpy(transaksi[*jumlahTransaksi].tanggal, tanggal);
+            transaksi[*jumlahTransaksi].jenis = jenis;
+            strcpy(transaksi[*jumlahTransaksi].kategori, kategori);
+            transaksi[*jumlahTransaksi].jumlah = jumlah;
+
+            (*jumlahTransaksi)++;
+            printf("Transaksi pengeluaran berhasil ditambahkan.\n");
+        } else {
+            printf("Transaksi ditolak. Saldo Anda tidak mencukupi. \n");
+        }
+    }
+    else {
+        printf("Jenis transaksi tidak valid! \n");
+    }
 }
 
 // Fungsi Placeholder
