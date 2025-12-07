@@ -38,7 +38,7 @@ int hitungSaldo(Transaksi transaksi[], int jumlahTransaksi) {
     return saldo;
 }
 
-// Fungsi utama: tambah transaksi
+// Fungsi Utama Menu 1: tambah transaksi
 void tambahTransaksi(Transaksi transaksi[], int *jumlahTransaksi) {
     if (*jumlahTransaksi >= MAX) {
         printf("Kapasitas transaksi penuh!\n");
@@ -96,10 +96,38 @@ void tambahTransaksi(Transaksi transaksi[], int *jumlahTransaksi) {
     }
 }
 
-// Fungsi Placeholder
-
+// Fungsi Utama Menu 2: lihat laporan transaksi
 void lihatLaporan(Transaksi transaksi[], int jumlahTransaksi) {
-    printf("Fitur lihat laporan belum diimplementasikan. \n");
+    if (jumlahTransaksi == 0) {
+        printf("\n Belum ada transaksi.\n");
+        return;
+    }
+    // Header tabel — pakai border dan pemisah |
+    printf("\n");
+    printf("+------------+--------+-----------------+------------+\n");
+    printf("| %-10s | %-6s | %-15s | %-10s |\n", "Tanggal", "Jenis", "Kategori", "Jumlah");
+    printf("+------------+--------+-----------------+------------+\n");
+
+    // Isi tabel
+    for (int i = 0; i < jumlahTransaksi; i++) {
+        char jenisStr[10];
+        if (transaksi[i].jenis == 'M' || transaksi[i].jenis == 'm') {
+            strcpy(jenisStr, "Masuk");
+        } else {
+            strcpy(jenisStr, "Keluar");
+        }
+
+        // Format baris tabel: 
+        printf("| %-10s | %-6s | %-15s | Rp %-7d |\n",
+               transaksi[i].tanggal,
+               jenisStr,
+               transaksi[i].kategori,
+               transaksi[i].jumlah);
+    }
+    // Footer tabel
+    printf("+------------+--------+-----------------+------------+\n");
+    printf("| %-42s %7d |\n", "Total transaksi:", jumlahTransaksi);
+    printf("+------------------------------------------+---------+\n");
 }
 
 void lihatSaldo(Transaksi transaksi[], int jumlahTransaksi) {
@@ -112,7 +140,7 @@ void simpanFile(Transaksi transaksi[], int jumlahTransaksi) {
 }
     
 
-// Fungsi utama
+// Fungsi Main:
 int main() {
     Transaksi transaksi[MAX];
     int jumlahTransaksi = 0;
@@ -156,6 +184,5 @@ int main() {
             getchar();
         }
     }
-
     return 0;
 }
