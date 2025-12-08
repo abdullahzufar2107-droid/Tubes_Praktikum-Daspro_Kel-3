@@ -51,18 +51,19 @@ void tambahTransaksi(Transaksi transaksi[], int *jumlahTransaksi) {
     char keterangan[50];
     int jumlah;
 
-    printf("Masukkan tanggal transaksi (DD/MM/YYYY): ");
+    printf("\n");
+    printf("Masukkan tanggal transaksi (DD/MM/YYYY) ---------------------------> ");
     scanf("%10s", tanggal);
 
-    printf("Jenis transaksi (M = Pemasukan, K = Pengeluaran): ");
+    printf("Masukkan Jenis transaksi (M = Pemasukan, K = Pengeluaran) ---------> ");
     scanf(" %c", &jenis);
 
-    printf("Masukkan keterangan: ");
+    printf("Masukkan keterangan -----------------------------------------------> ");
     bersihkanBuffer(); // kosongkan buffer sebelum baca string
     fgets(keterangan, sizeof(keterangan), stdin);
     keterangan[strcspn(keterangan, "\n")] = '\0'; // hapus newline
 
-    printf("Masukkan jumlah uang: ");
+    printf("Masukkan jumlah uang ----------------------------------------------> ");
     scanf("%d", &jumlah);
 
     // Cek jenis transaksi
@@ -100,14 +101,17 @@ void tambahTransaksi(Transaksi transaksi[], int *jumlahTransaksi) {
 // Fungsi Utama Menu 2: lihat laporan transaksi
 void lihatLaporan(Transaksi transaksi[], int jumlahTransaksi) {
     if (jumlahTransaksi == 0) {
-        printf("\n Belum ada transaksi.\n");
+        printf("\nBelum ada transaksi.\n");
+        printf("Data Kosong.\n");
         return;
     }
     // Header tabel — pakai border dan pemisah |
     printf("\n");
-    printf("+------------+--------+-----------------+------------+\n");
-    printf("| %-10s | %-6s | %-15s | %-10s |\n", "Tanggal", "Jenis", "Keterangan", "Jumlah");
-    printf("+------------+--------+-----------------+------------+\n");
+    printf("LAPORAN TRANSAKSI ANDA");
+    printf("\n");
+    printf("+---------------------+------------+----------------------+-------------------+\n");
+    printf("| %-19s | %-10s | %-20s | %-17s |\n", "Tanggal", "Jenis", "Keterangan", "Jumlah");
+    printf("|---------------------+------------+----------------------+-------------------|\n");
 
     // Isi tabel
     for (int i = 0; i < jumlahTransaksi; i++) {
@@ -119,31 +123,31 @@ void lihatLaporan(Transaksi transaksi[], int jumlahTransaksi) {
         }
 
         // Format baris tabel: 
-        printf("| %-10s | %-6s | %-15s | Rp %-7d |\n",
+        printf("| %-19s | %-10s | %-20s | Rp %-14d |\n",
                transaksi[i].tanggal,
                jenisStr,
                transaksi[i].keterangan,
                transaksi[i].jumlah);
     }
     // Footer tabel
-    printf("+------------+--------+-----------------+------------+\n");
-    printf("| %-42s %7d |\n", "Total transaksi:", jumlahTransaksi);
-    printf("+------------------------------------------+---------+\n");
+    printf("|---------------------+------------+----------------------+-------------------|\n");
+    printf("| %-67s %7d |\n", "Total transaksi:", jumlahTransaksi);
+    printf("+---------------------------------------------------------+-------------------+\n");
 }
 // Fungsi Utama Menu 3: lihat saldo
 void lihatSaldo(Transaksi transaksi[], int jumlahTransaksi) {
-    printf("\n========== LIHAT SALDO ==========\n");
+    printf("\n================================== SALDO ANDA ==================================\n");
 
     if (jumlahTransaksi == 0) {
-        printf("Belum ada transaksi.\n");
-        printf("Saldo saat ini: 0\n");
-        printf("===============================\n");
+        printf("| Belum ada transaksi.                                                         |\n");
+        printf("| Saldo saat ini: 0                                                            |\n");
+        printf("================================================================================\n");
         return;
     }
 
     int saldo = hitungSaldo(transaksi, jumlahTransaksi);
 
-    printf("Total pemasukan   : ");
+    printf("| Total pemasukan                                        : ");
     int pemasukan = 0;
     int pengeluaran = 0;
 
@@ -156,12 +160,11 @@ void lihatSaldo(Transaksi transaksi[], int jumlahTransaksi) {
         }
     }
 
-    printf("Rp %d\n", pemasukan);
-    printf("Total pengeluaran : Rp %d\n", pengeluaran);
-
-    printf("---------------------------------\n");
-    printf("Saldo saat ini    : Rp %d\n", saldo);
-    printf("=================================\n");
+    printf("Rp %-16d |\n", pemasukan);
+    printf("| Total pengeluaran                                      : Rp %-16d |\n", pengeluaran);
+    printf("|------------------------------------------------------------------------------|\n");
+    printf("| Saldo saat ini                                         : Rp %-16d |\n", saldo);
+    printf("================================================================================\n");
 }
 
 // Fungsi untuk menyimpan file
@@ -236,13 +239,21 @@ int main() {
     muatFile(transaksi, &jumlahTransaksi);
 
     while (running) {
-        printf("\n======= CATATAN KEUANGAN HARIAN =======\n");
-        printf("| 1. Tambah Laporan Transaksi         |\n");
-        printf("| 2. Lihat Laporan Transaksi          |\n");
-        printf("| 3. Lihat Saldo                      |\n");
-        printf("| 4. Simpan & Keluar                  |\n");
-        printf("=======================================\n");
-        printf("Pilih menu: ");
+        printf("\n=========================== CATATAN KEUANGAN HARIAN ===========================\n");
+        printf("|                                                                             |\n");
+        printf("|  MENU UTAMA:                                                                |\n");
+        printf("|                                                                             |\n");
+        printf("|     1. Tambah Laporan Transaksi                                             |\n");
+        printf("|                                                                             |\n");
+        printf("|     2. Lihat Laporan Transaksi                                              |\n");
+        printf("|                                                                             |\n");
+        printf("|     3. Lihat Saldo                                                          |\n");
+        printf("|                                                                             |\n");
+        printf("|     4. Simpan & Keluar                                                      |\n");
+        printf("|                                                                             |\n");
+        printf("===============================================================================\n");
+        printf("\n");
+        printf("Pilih Menu: ");
         scanf("%d", &pilihan);
 
         switch (pilihan) {
@@ -259,6 +270,7 @@ int main() {
                 simpanFile(transaksi, jumlahTransaksi);
                 printf("\nData berhasil disimpan.\n");
                 printf("Terima kasih.\n");
+                printf("\n");
                 running = 0;
                 break;
             default:
