@@ -5,6 +5,9 @@
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
 #define YELLOW  "\033[33m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define BOLD    "\033[1m"
 
 #define MAX 100
 
@@ -112,9 +115,14 @@ void lihatLaporan(Transaksi transaksi[], int jumlahTransaksi) {
     }
 
     // Header tabel - pakai border dan pemisah |
-    printf("\nLAPORAN TRANSAKSI ANDA\n");
+    printf("\n%sLAPORAN TRANSAKSI ANDA%s\n", BOLD, RESET);
     printf("+---------------------+------------+----------------------+-------------------+\n");
-    printf("| %-19s | %-10s | %-20s | %-17s |\n","Tanggal","Jenis","Keterangan","Jumlah");
+    printf("| %s%-19s%s | %s%-10s%s | %s%-20s%s | %s%-17s%s |\n",
+            CYAN, "Tanggal", RESET,
+            CYAN, "Jenis", RESET,
+            CYAN, "Keterangan", RESET,
+            CYAN, "Jumlah", RESET);
+
     printf("|---------------------+------------+----------------------+-------------------|\n");
 
     // Isi tabel
@@ -140,7 +148,7 @@ void lihatLaporan(Transaksi transaksi[], int jumlahTransaksi) {
 
 // Fungsi Utama Menu 3: lihat saldo
 void lihatSaldo(Transaksi transaksi[], int jumlahTransaksi) {
-    printf("\n================================== SALDO ANDA ==================================\n");
+    printf("\n%s================================== SALDO ANDA ==================================%s\n", BOLD, RESET);
 
     if (jumlahTransaksi == 0) {
         printf("| %sBelum ada transaksi.%s                                                         |\n", RED, RESET);
@@ -248,21 +256,21 @@ int main() {
     muatFile(transaksi, &jumlahTransaksi);
 
     while (running) {
-        printf("\n=========================== CATATAN KEUANGAN HARIAN ===========================\n");
+        printf("\n%s=========================== CATATAN KEUANGAN HARIAN ===========================%s\n", BOLD, RESET);
         printf("|                                                                             |\n");
         printf("|  MENU UTAMA:                                                                |\n");
         printf("|                                                                             |\n");
-        printf("|     1. Tambah Laporan Transaksi                                             |\n");
+        printf("|     %s1. Tambah Laporan Transaksi%s                                             |\n", MAGENTA, RESET);
         printf("|                                                                             |\n");
-        printf("|     2. Lihat Laporan Transaksi                                              |\n");
+        printf("|     %s2. Lihat Laporan Transaksi%s                                              |\n", MAGENTA, RESET);
         printf("|                                                                             |\n");
-        printf("|     3. Lihat Saldo                                                          |\n");
+        printf("|     %s3. Lihat Saldo%s                                                          |\n", MAGENTA, RESET);
         printf("|                                                                             |\n");
-        printf("|     4. Simpan & Keluar                                                      |\n");
+        printf("|     %s4. Simpan & Keluar%s                                                      |\n", MAGENTA, RESET);
         printf("|                                                                             |\n");
         printf("===============================================================================\n");
         printf("\n");
-        printf("Pilih Menu: ");
+        printf("%sPilih Menu: %s", CYAN, RESET);
         scanf("%d", &pilihan);
 
         switch (pilihan) {
